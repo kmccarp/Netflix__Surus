@@ -21,11 +21,11 @@ import org.xml.sax.SAXException;
 public class ScorePMML_IrisTest {
 
 	// Iris Models
-	private String treeIrisModelPath = "./resources/examples/models/single_iris_dectree.xml";
-	private String nnIrisModelPath   = "./resources/examples/models/single_iris_mlp.xml";
-	private String rfIrisModelPath   = "./resources/examples/models/example.randomForest.xml";
-	
-    private TupleFactory tf = TupleFactory.getInstance();
+	private final String treeIrisModelPath = "./resources/examples/models/single_iris_dectree.xml";
+	private final String nnIrisModelPath = "./resources/examples/models/single_iris_mlp.xml";
+	private final String rfIrisModelPath = "./resources/examples/models/example.randomForest.xml";
+
+	private final TupleFactory tf = TupleFactory.getInstance();
 	
 	// --------------------------
 	// Iris Test Functions
@@ -182,7 +182,7 @@ public class ScorePMML_IrisTest {
     private Schema buildIrisInputSchema() throws FrontendException {
 
     	// Build Field Schema
-    	List<FieldSchema> fieldSchemas = new ArrayList<FieldSchema>();
+    	List<FieldSchema> fieldSchemas = new ArrayList<>();
         fieldSchemas.add(new Schema.FieldSchema("sepal_length"  , DataType.DOUBLE));
         fieldSchemas.add(new Schema.FieldSchema("sepal_width"   , DataType.DOUBLE));
         fieldSchemas.add(new Schema.FieldSchema("petal_length"  , DataType.DOUBLE));
@@ -192,13 +192,13 @@ public class ScorePMML_IrisTest {
         return new Schema(fieldSchemas);
     }
 
-    private Tuple buildIrisInputEvent(double sepal_length, double sepal_width, double petal_length, double petal_width, String inputClass) {
+    private Tuple buildIrisInputEvent(double sepalLength, double sepalWidth, double petalLength, double petalWidth, String inputClass) {
 
         Tuple newTuple = tf.newTuple();
-        newTuple.append(sepal_length);
-        newTuple.append(sepal_width);
-        newTuple.append(petal_length);
-        newTuple.append(petal_width);
+        newTuple.append(sepalLength);
+        newTuple.append(sepalWidth);
+        newTuple.append(petalLength);
+        newTuple.append(petalWidth);
         newTuple.append(inputClass);
 
         return newTuple;
@@ -212,11 +212,11 @@ public class ScorePMML_IrisTest {
         return newTuple;
     }
 
-    private Tuple buildIrisOutputEvent(String predictedClass, String outputField_Class, double predictedClass1, double predictedClass2, double predictedClass3) {
+    private Tuple buildIrisOutputEvent(String predictedClass, String outputFieldClass, double predictedClass1, double predictedClass2, double predictedClass3) {
 
         Tuple newTuple = tf.newTuple();
         newTuple.append(predictedClass);
-        newTuple.append(outputField_Class);
+        newTuple.append(outputFieldClass);
         newTuple.append(predictedClass1);
         newTuple.append(predictedClass2);
         newTuple.append(predictedClass3);
