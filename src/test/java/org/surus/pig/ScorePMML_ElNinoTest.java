@@ -21,9 +21,9 @@ import org.xml.sax.SAXException;
 public class ScorePMML_ElNinoTest {
 
 	// ElNino Models
-	private String regressionElNinoModelPath = "./resources/examples/models/elnino_linearReg.xml";
+	private final String regressionElNinoModelPath = "./resources/examples/models/elnino_linearReg.xml";
 
-    private TupleFactory tf = TupleFactory.getInstance();
+	private final TupleFactory tf = TupleFactory.getInstance();
 
 	// --------------------------
 	// ElNino Test Functions
@@ -70,7 +70,7 @@ public class ScorePMML_ElNinoTest {
     private Schema buildElNinoInputSchema() throws FrontendException {
 
     	// Build Field Schema
-    	List<FieldSchema> fieldSchemas = new ArrayList<FieldSchema>();
+    	List<FieldSchema> fieldSchemas = new ArrayList<>();
         fieldSchemas.add(new Schema.FieldSchema("buoy_day_ID", DataType.CHARARRAY));
         fieldSchemas.add(new Schema.FieldSchema("buoy"       , DataType.CHARARRAY));
         fieldSchemas.add(new Schema.FieldSchema("day"        , DataType.CHARARRAY));
@@ -86,27 +86,27 @@ public class ScorePMML_ElNinoTest {
 
     }
 
-    private Tuple buildElNinoInputEvent( String buoy_day_ID, String buoy, String day, String latitude, String longitude, String zon_winds, String mer_winds, String humidity, String airtemp, String s_s_temp) {
+    private Tuple buildElNinoInputEvent( String buoyDayID, String buoy, String day, String latitude, String longitude, String zonWinds, String merWinds, String humidity, String airtemp, String sSTemp) {
 
         Tuple newTuple = tf.newTuple();
-        newTuple.append(buoy_day_ID);
+        newTuple.append(buoyDayID);
         newTuple.append(buoy       );
         newTuple.append(day        );
         newTuple.append(latitude   );
         newTuple.append(longitude  );
-        newTuple.append(zon_winds  );
-        newTuple.append(mer_winds  );
+        newTuple.append(zonWinds  );
+        newTuple.append(merWinds  );
         newTuple.append(humidity   );
         newTuple.append(airtemp    );
-        newTuple.append(s_s_temp   );
+        newTuple.append(sSTemp   );
 
         return newTuple;
     }
 
-    private Tuple buildElNinoOutputEvent( String buoy_day_ID, String buoy, String day, String latitude, String longitude, String zon_winds, String mer_winds, String humidity, String airtemp, String s_s_temp, double airtemp_predicted) {
+    private Tuple buildElNinoOutputEvent( String buoy_day_ID, String buoy, String day, String latitude, String longitude, String zon_winds, String mer_winds, String humidity, String airtemp, String s_s_temp, double airtempPredicted) {
 
 		Tuple newTuple = tf.newTuple();
-		newTuple.append(airtemp_predicted);
+		newTuple.append(airtempPredicted);
 		
 		return newTuple;
     }
