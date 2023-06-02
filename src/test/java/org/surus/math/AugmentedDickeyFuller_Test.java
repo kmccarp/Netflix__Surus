@@ -12,19 +12,19 @@ public class AugmentedDickeyFuller_Test {
 	public void testLinearTrend() {
 		Random rand = new Random();
 		double[] x = new double[100];
-		for (int i = 0; i < x.length; i ++) {
-			x[i] = (i+1) + 5*rand.nextDouble();
+		for (int i = 0; i < x.length; i++) {
+			x[i] = (i + 1) + 5 * rand.nextDouble();
 		}
 		AugmentedDickeyFuller adf = new AugmentedDickeyFuller(x);
 		assertTrue(adf.isNeedsDiff() == true);
 	}
-	
+
 	@Test
 	public void testLinearTrendWithOutlier() {
 		Random rand = new Random();
 		double[] x = new double[100];
-		for (int i = 0; i < x.length; i ++) {
-			x[i] = (i+1) + 5*rand.nextDouble();
+		for (int i = 0; i < x.length; i++) {
+			x[i] = (i + 1) + 5 * rand.nextDouble();
 		}
 		x[50] = 100;
 		AugmentedDickeyFuller adf = new AugmentedDickeyFuller(x);
