@@ -21,10 +21,10 @@ import org.xml.sax.SAXException;
 public class ScorePMML_AuditTest {
 
 	// Audit Models
-	private String ensembleAuditModelPath = "./resources/examples/models/ensemble_audit_dectree.xml";
+	private final String ensembleAuditModelPath = "./resources/examples/models/ensemble_audit_dectree.xml";
 
 	// Tuple Factory
-    private TupleFactory tf = TupleFactory.getInstance();
+	private final TupleFactory tf = TupleFactory.getInstance();
 
 	// --------------------------
 	// Audit Test Functions
@@ -71,7 +71,7 @@ public class ScorePMML_AuditTest {
     private Schema buildAuditInputSchema() throws FrontendException {
 
     	// Build Field Schema
-    	List<FieldSchema> fieldSchemas = new ArrayList<FieldSchema>();
+    	List<FieldSchema> fieldSchemas = new ArrayList<>();
         fieldSchemas.add(new Schema.FieldSchema("id"             , DataType.LONG));
         fieldSchemas.add(new Schema.FieldSchema("age"            , DataType.INTEGER));
         fieldSchemas.add(new Schema.FieldSchema("employment"     , DataType.CHARARRAY));
@@ -90,35 +90,35 @@ public class ScorePMML_AuditTest {
 
     }
 
-    private Tuple buildAuditInputEvent( Long    ID             
-    	                              , Integer Age            
-    	                              , String  Employment     
-    	                              , String  Education      
-    	                              , String  Marital        
-    	                              , String  Occupation     
-    	                              , Double  Income         
-    	                              , String  Gender         
-    	                              , Integer Deductions     
-    	                              , Integer Hours          
-    	                              , String  IGNORE_Accounts
-    	                              , Integer RISK_Adjustment
-    	                              , Integer TARGET_Adjusted) {
+    private Tuple buildAuditInputEvent( Long    id             
+    	                              , Integer age            
+    	                              , String  employment     
+    	                              , String  education      
+    	                              , String  marital        
+    	                              , String  occupation     
+    	                              , Double  income         
+    	                              , String  gender         
+    	                              , Integer deductions     
+    	                              , Integer hours          
+    	                              , String  iGNOREAccounts
+    	                              , Integer rISKAdjustment
+    	                              , Integer tARGETAdjusted) {
     	
     	
         Tuple newTuple = tf.newTuple();
-        newTuple.append(ID             );
-        newTuple.append(Age            );
-        newTuple.append(Employment     );
-        newTuple.append(Education      );
-        newTuple.append(Marital        );
-        newTuple.append(Occupation     );
-        newTuple.append(Income         );
-        newTuple.append(Gender         );
-        newTuple.append(Deductions     );
-        newTuple.append(Hours          );
-        newTuple.append(IGNORE_Accounts);
-        newTuple.append(RISK_Adjustment);
-        newTuple.append(TARGET_Adjusted);
+        newTuple.append(id             );
+        newTuple.append(age            );
+        newTuple.append(employment     );
+        newTuple.append(education      );
+        newTuple.append(marital        );
+        newTuple.append(occupation     );
+        newTuple.append(income         );
+        newTuple.append(gender         );
+        newTuple.append(deductions     );
+        newTuple.append(hours          );
+        newTuple.append(iGNOREAccounts);
+        newTuple.append(rISKAdjustment);
+        newTuple.append(tARGETAdjusted);
 
         return newTuple;
     }
@@ -136,10 +136,10 @@ public class ScorePMML_AuditTest {
                                        , String  IGNORE_Accounts
                                        , Integer RISK_Adjustment
                                        , Integer TARGET_Adjusted
-                                       , String  TARGET_Adjusted_predicted) {
+                                       , String  tARGETAdjustedPredicted) {
 
 		Tuple newTuple = tf.newTuple();
-		newTuple.append(TARGET_Adjusted_predicted);
+		newTuple.append(tARGETAdjustedPredicted);
 		
 		return newTuple;
     }

@@ -18,10 +18,10 @@ import org.surus.math.RPCA;
 
 public class RAD extends EvalFunc<DataBag> {
 
-	private final double LPENALTY_DEFAULT_NO_DIFF = 1;
-	private final double SPENALTY_DEFAULT_NO_DIFF = 1.4;
-	private final double LPENALTY_DEFAULT_DIFF = 1;
-	private final double SPENALTY_DEFAULT_DIFF = 1.4;
+	private final double lpenaltyDefaultNoDiff = 1;
+	private final double spenaltyDefaultNoDiff = 1.4;
+	private final double lpenaltyDefaultDiff = 1;
+	private final double spenaltyDefaultDiff = 1.4;
 	
 	private final String  colName;
 	private final Integer nRows;
@@ -81,7 +81,7 @@ public class RAD extends EvalFunc<DataBag> {
             this.dataBagSchema.prettyPrint();
             
         	// Create List of Tuple Values
-        	List<FieldSchema> fieldSchemas = new ArrayList<FieldSchema>();
+        	List<FieldSchema> fieldSchemas = new ArrayList<>();
         	fieldSchemas.addAll(dataBagSchema.getFields());
             fieldSchemas.add(new Schema.FieldSchema("x_transform", DataType.DOUBLE));
             fieldSchemas.add(new Schema.FieldSchema("rsvd_l", DataType.DOUBLE));
@@ -93,8 +93,7 @@ public class RAD extends EvalFunc<DataBag> {
             FieldSchema bagFieldSchema   = new FieldSchema(this.getClass().getName().toLowerCase().replace(".", "_"), new Schema(tupleFieldSchema), DataType.BAG);
             
             // Return Schema
-            Schema outputSchema = new Schema(bagFieldSchema);
-            return outputSchema;
+            return new Schema(bagFieldSchema);
             
         } catch (Throwable t) {
             throw new RuntimeException(t);
@@ -141,7 +140,7 @@ public class RAD extends EvalFunc<DataBag> {
 		BagFactory   bagFactory   = BagFactory.getInstance();
 
 		// Read Data into Memory
-		List<Tuple> tupleList = new ArrayList<Tuple>();
+		List<Tuple> tupleList = new ArrayList<>();
 		Iterator<Tuple> bagIter = inputBag.iterator();
 		while (bagIter.hasNext()) {
 			Tuple tuple = bagIter.next();
@@ -168,8 +167,10 @@ public class RAD extends EvalFunc<DataBag> {
 	        	throw new RuntimeException(String.format("Data type of %s (%s) is not supported,",this.colName,
 	                    DataType.findTypeName(this.dataBagSchema.getField(this.colName).type)));
 			}
-			
-			if (Math.abs(inputArray[n]) > eps) numNonZeroRecords++;
+
+			if (Math.abs(inputArray[n]) > eps) {
+				numNonZeroRecords++;
+			}
 		}
 		
 		if (numNonZeroRecords>=this.minRecords) {
@@ -184,8 +185,8 @@ public class RAD extends EvalFunc<DataBag> {
 			}
 			
 			if (this.spenalty == null) {
-				this.lpenalty = this.LPENALTY_DEFAULT_NO_DIFF;
-				this.spenalty = this.SPENALTY_DEFAULT_NO_DIFF / Math.sqrt(Math.max(this.nCols, this.nRows));
+				this.lpenalty = this.lpenaltyDefaultNoDiff;
+				this.spenalty = this.spenaltyDefaultNoDiff / Math.sqrt(Math.max(this.nCols, this.nRows));
 			}
 
 			
